@@ -1,3 +1,3 @@
 # ElasticMapping
 
-A simple query builder for Elasticsearch.
+A simple mapping builder for Elasticsearch.
