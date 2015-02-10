@@ -1,6 +1,6 @@
 # ElasticMapping
 
-A simple mapping builder for Elasticsearch.
+A simple mapping builder for Elasticsearch. Install with `pip install elasticmapping`.
 
 
 ## Synopsis
