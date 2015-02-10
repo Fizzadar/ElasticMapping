@@ -4,39 +4,67 @@
 
 
 class CallableDict(dict):
-    def __call__(self, **kwargs):
-        new_dict = self.copy()
-        new_dict.update(kwargs)
+    BASE = None
+    OVERRIDES = None
+
+    def __call__(self, overrides):
+        new_dict = CallableDict(self)
+        new_dict.OVERRIDES = overrides
+        new_dict.BASE = self
         return new_dict
 
 
-class Types:
-    option_map = {
-        'STRING': ['index']
-    }
+BASE_TYPE = {
+    'store': False,
+    'doc_values': False
+}
 
-    STRING = CallableDict({
-        'type': 'string'
-    })
+STRING = CallableDict({
+    'type': 'string',
+    'index': 'analyzed'
+})
 
-    INTEGER = CallableDict({
-        'type': 'integer'
-    })
+FLOAT = CallableDict({
+    'type': 'float'
+})
 
-    FLOAT = CallableDict({
-        'type': 'integer'
-    })
+DOUBLE = CallableDict({
+    'type': 'double'
+})
 
-    BOOLEAN = CallableDict({
-        'type': 'integer'
-    })
+INTEGER = CallableDict({
+    'type': 'integer'
+})
 
-    DATE = CallableDict({
-        'type': 'date',
-        'format': 'date_optional_time'
-    })
+LONG = CallableDict({
+    'type': 'long'
+})
 
-    DATETIME = CallableDict({
-        'type': 'date',
-        'format': 'date_hour_minute_second_fraction'
-    })
+SHORT = CallableDict({
+    'type': 'short'
+})
+
+BYTE = CallableDict({
+    'type': 'byte'
+})
+
+BOOLEAN = CallableDict({
+    'type': 'boolean'
+})
+
+DATE = CallableDict({
+    'type': 'date',
+    'format': 'date'
+})
+
+DATETIME = CallableDict({
+    'type': 'date',
+    'format': 'date_hour_minute_second'
+})
+
+
+TYPES = {
+    name: type
+    for name, type in locals().items()
+    if isinstance(type, CallableDict)
+}

@@ -1,1 +1,1 @@
-from .mapping import ElasticMapping # noqa
+from .mapping import ElasticMapping, Nest # noqa
