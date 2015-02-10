@@ -1,6 +1,6 @@
 # ElasticMapping
 
-A _simple_ mapping builder for Elasticsearch.
+A simple mapping builder for Elasticsearch.
 
 
 ## Synopsis
