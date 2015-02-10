@@ -1,4 +1,7 @@
+# Standard
+.DS_Store
+
+# Python
 *.pyc
-*.DS_Store
-*.egg-info
+ElasticMapping.egg-info/
 dist/
