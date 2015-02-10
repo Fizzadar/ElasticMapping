@@ -40,8 +40,9 @@ class DocMapping(BaseMapping):
     )
 
 
-# Print out JSON ready for ES
-print DocMapping.json(indent=4)
+if __name__ == '__main__':
+    # Print out JSON ready for ES
+    print 'JSON', DocMapping.json(indent=4)
 
-# Create the mappings with provided __es__ client
-print DocMapping.put()
+    # Create the mappings with provided __es__ client
+    print 'PUT', DocMapping.put()
