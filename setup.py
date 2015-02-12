@@ -9,7 +9,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    version='1.0',
+    version='1.1',
     name='ElasticMapping',
     description='A simple mappings builder for Elasticsearch',
     author='Nick Barrett',
