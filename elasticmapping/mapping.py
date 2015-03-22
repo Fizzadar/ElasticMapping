@@ -14,42 +14,14 @@ from .exception import NoESClient, NoDocType, NoIndexName, NoElasticQuery
 
 
 class Nest(object):
-    '''A nested ES mapping'''
+    '''A nested ES mapping.'''
     def __init__(self, **kwargs):
         for key, value in kwargs.iteritems():
             setattr(self, key, value)
 
-class ElasticMappingMeta(type):
-    '''Metaclass to provide a @classproperty for the query attribute'''
-    @property
-    def query(cls):
-        if cls._query is not None:
-            return cls._query
-
-        if ElasticQuery is None:
-            raise NoElasticQuery()
-
-        if cls.__es__ is None:
-            raise NoESClient()
-        if cls.__index__ is None:
-            raise NoIndexName()
-        if cls.__doc_type__ is None:
-            raise NoDocType()
-
-        query = ElasticQuery(
-            es=cls.__es__,
-            index=cls.__index__,
-            doc_type=cls.__doc_type__,
-            mapping=cls.attributes()
-        )
-
-        cls._query = query
-        return query
 
 class ElasticMapping(object):
-    '''A class for building ES mappngs'''
-    __metaclass__ = ElasticMappingMeta
-
+    '''A class for building ES mappngs.'''
     __es__ = None
     __index__ = None
     __doc_type__ = None
@@ -63,7 +35,7 @@ class ElasticMapping(object):
 
     @classmethod
     def attributes(cls):
-        '''Builds an internal representation of the mapping, with no top-level nesting ES uses'''
+        '''Builds an internal representation of the mapping, with no top-level nesting ES uses.'''
         if cls._attributes is not None:
             return cls._attributes
 
@@ -110,7 +82,7 @@ class ElasticMapping(object):
 
     @classmethod
     def dict(cls):
-        '''Nests the internal attributes dict inside the doc_type/etc ES format'''
+        '''Nests the internal attributes dict inside the doc_type/etc ES format.'''
         if cls.__doc_type__ is None:
             raise NoDocType()
 
@@ -130,7 +102,7 @@ class ElasticMapping(object):
 
     @classmethod
     def put(cls):
-        '''Puts the mapping to ES when __es__ and __index__ are provided to the class'''
+        '''Puts the mapping to ES when __es__ and __index__ are provided to the class.'''
         if cls.__es__ is None:
             raise NoESClient()
         if cls.__index__ is None:
@@ -142,4 +114,23 @@ class ElasticMapping(object):
             index=cls.__index__,
             doc_type=cls.__doc_type__,
             body=cls.dict()
+        )
+
+    @classmethod
+    def query(self):
+        if ElasticQuery is None:
+            raise NoElasticQuery()
+
+        if self.__es__ is None:
+            raise NoESClient()
+        if self.__index__ is None:
+            raise NoIndexName()
+        if self.__doc_type__ is None:
+            raise NoDocType()
+
+        return ElasticQuery(
+            es=self.__es__,
+            index=self.__index__,
+            doc_type=self.__doc_type__,
+            mapping=self.attributes()
         )
