@@ -57,9 +57,14 @@ DATE = CallableDict({
     'format': 'date'
 })
 
+TIME = CallableDict({
+    'type': 'date',
+    'format': 'time'
+})
+
 DATETIME = CallableDict({
     'type': 'date',
-    'format': 'date_hour_minute_second_fraction'
+    'format': 'date_optional_time'
 })
 
 
