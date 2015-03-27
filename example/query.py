@@ -7,7 +7,7 @@ from elasticquery import Filter
 from mapping import DocMapping
 
 
-q = DocMapping.query.must(
+q = DocMapping.query().must(
     Filter.term(slug='test_slug'),
     Filter.nested('nested_document', must=[
         Filter.term(float_type=1.0)
