@@ -35,7 +35,7 @@ Check out the [full example](./example/mapping.py).
 + `STRING`
 + `BOOLEAN`
 + `FLOAT`, `DOUBLE`, `INTEGER`, `LONG`, `SHORT`, `BYTE`
-+ `DATE` (format = `date`), `DATETIME` (format = `date_hour_minute_second`)
++ `DATE`, `TIME`, `DATETIME` (format = `date_optional_time`)
 
 
 ## ElasticQuery support
